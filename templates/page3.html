@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--========== CSS ==========-->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/styles.css') }}">
+
+        <title>watermarking</title>
+    </head>
+    <body>
+
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="#" class="nav__logo"><h1>Biometric Watermarking</h1></a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
+                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                        <li class="nav__item"><a href="/" class="nav__link">Logout</a></li>
+                        <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+        <!--========== HEADER ENDS ==========-->
+
+        <main class="l-main">
+            <!--========== HOME ==========-->
+            <section class="home" id="home">
+                <div class="home__container bd-container bd-grid">
+                    <div class="home__data">
+                        <h1 class="home__title">Welcome!<br></h1>
+                        <p>Greetings, user, we extend a warm welcome to you.   By utilizing the biometric identifiers of fingerprint and iris, you have the ability to establish a unique watermark on your document.   Such a measure not only safeguards your document from unauthorized use, but also serves as a validation of ownership.</p>
+
+                    </div>
+                    
+                    <img src="{{url_for('static', filename='styles/img/logo.png')}}" alt = "" class="home__img">
+                </div>
+            </section>
+
+            <!--========== ABOUT ==========-->
+            <section class="about section bd-container" id="about">
+                <div class="about__container  bd-grid">
+                    <div class="about__data">
+                        <span class="section-subtitle about__initial">About us</span>
+                        <h2 class="section-title about__initial">Biometric Watermarking</h2>
+                        <p class="about__description">We are a team of final-year Information Science and Engineering students from BGS Institute of Technology. Our project focuses on enhancing document authentication through advanced biometric watermarking techniques.
+                            Meet Our Team: <br><br>
+                            
+                            Rekha Rani <br>
+                            rekharani@bgsit.ac.in <br>
+                            
+                            
+                            Shashank Gowda HM shashankgowdahm@bgsit.ac.in <br>
+                            
+                            Thilak Gowda R thilakgowdar@bgsit.ac.in <br>
+                            
+                            
+                            Project Guide: <br><br>
+                            Nischitha AR <br>
+                            nischithaar@bgsit.ac.in <br>
+                            
+                            
+                            Our Mission: <br><br>
+                            To develop a secure, innovative, and reliable biometric watermarking solution for document authentication. </p>
+    
+                    </div>
+
+                    <img src="static/styles/img/logo.png" alt="" class="about__img">
+                </div>
+            </section>
+
+            <!--========== SERVICES ==========-->
+            <section class="services section bd-container" id="services">
+                <span class="section-subtitle">Offering</span>
+                <h2 class="section-title">Our amazing services</h2>
+
+                <div class="services__container  bd-grid">
+                    <div class="services__content">
+                        <img src="static/styles/img/Image.png" style="width: 300px;height: 300px;">
+                        <a href="/imageencryption" class="button">Image</a>
+                    </div>
+
+                    <div class="services__content">
+                        <img src="static/styles/img/Audio.png" style="width: 300px;height: 300px;">
+                        <a href="/audioencryption" class="button">Audio</a>
+                    </div>
+
+                    <div class="services__content">
+                        <img src="static/styles/img/Pdf.png" style="width: 300px;height: 300px;">
+                        <a href="/pdfencryption" class="button">PDF</a>
+                    </div>
+                </div>
+            </section>
+            <!--========== SERVICES ENDS ==========-->
+
+            <!--========== CONTACT US ==========-->
+            <section class="contact section bd-container" id="contact">
+                        <h2 class="section-title contact__initial">Contact us</h2>
+                        <div style="display: flex;justify-content: space-around;">
+                            <div style="width: 50%;">
+                                <a href="#" class="footer__social"><i class='bx bxl-facebook'></i></a>
+                                <a href="#" class="footer__social"><i class='bx bxl-instagram'></i></a>
+                                <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                                <p><a href="#" class="footer__social"><i class='bx bx-envelope'></i></a>&nbsp;&nbsp;&nbsp;bgsit@gmail.com</p>
+                                <p><a href="#" class="footer__social"><i class='bx bx-phone'></i></a>&nbsp;&nbsp;&nbsp;+919876543210</p>
+                            </div>
+    
+                            <div style="width: 50%;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.1178747754097!2d76.72500067507637!3d12.964308387350393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bafeed69801ae53%3A0xa9dd86aab57869ad!2sBGS%20INSTITUTE%20OF%20TECHNOLOGY%20(%20BGSIT%20)!5e0!3m2!1sen!2sin!4v1739011203199!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.1351930955316!2d75.79563977508298!3d13.341865287008588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbad77aa342ed7f%3A0xaec39f2826004a0!2sAdichunchanagiri%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1736868434643!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                            </div>
+                        </div>
+            </section>
+        </main>
+
+        <!--========== FOOTER ==========-->
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="static/styles/js/main.js"></script>
+    </body>
+</html>

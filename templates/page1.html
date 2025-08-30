@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ICONS -->
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/css/style-login.css') }}">
+
+    <title>Watermarking</title>
+  </head>
+  <body>
+    {% if msg %}
+    <br>
+    <center><h3>{{msg}}</h3></center>
+    <br>
+    {% endif %}
+    <div class="container">
+      
+      <div class="forms-container">
+       
+        <div class="signin-signup">
+
+          <!-- LOGIN FORM -->
+           
+          <form method="POST" action="/login" class="sign-in-form">
+            
+            <h2 class="title">Sign in</h2>
+            <div class="input-field">
+              <i class="fas fa-mobile-alt"></i>
+              <input type="email" placeholder="Email" name="email" required id="login-email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" name="password" required id="login-password" />
+            </div>
+            <input type="submit" value="Login" class="btn solid" />
+          </form>
+          <!-- LOGIN FORM ENDS -->
+
+          <!-- REGISTRATION FORM -->
+          <form method="POST" action="/register" class="sign-up-form" enctype="multipart/form-data">
+            <h2 class="title">Sign up</h2>
+
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="First Name" name="fname" required />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Last Name" name="lname" required />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-map-marker-alt"></i>
+              <input
+                type="text" placeholder="Mobile Number"name="phone" id="phone" required pattern="[6-9]{1}[0-9]{9}" 
+                title="Phone number with 6-9 and remaing 9 digit with 0-9" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-mobile-alt"></i>
+              <input type="email" placeholder="Email" name="email" required id="register-email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" name="password" required id="register-password" />
+            </div>
+            <div>
+              <div>
+                <br><a href="/page2"
+                style="width: 150px; height: 50px; font-size: 16px; background-color: black; color: white; border: none; cursor: pointer;padding: 10px;text-decoration: none;margin: 5px;"
+              >Fingerprint
+            </a><br>
+              </div>
+            </div>
+            <br>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="file" name="fingerprint" required />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="">Fingerprint&nbsp;&nbsp;image</label>
+            </div>
+            <input type="submit" class="btn" value="Sign up" />
+          </form>
+          <!-- REGISTRATION FORM ENDS -->
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <!-- LOGIN PANEL -->
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here?</h3>
+            <p>
+              Register yourself to access our services.
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              Sign up
+            </button>
+          </div>
+          <img src="static/styles/img/logo.png" class="image" alt="" />
+        </div>
+
+        <!-- REGISTER PANEL -->
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us?</h3>
+            <p>
+              Already registered? Then hop on & access our services.
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Sign in
+            </button>
+          </div>
+          <img src="static/styles/img/logo.png" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="static/styles/js/login.js"></script>
+    <script>
+
+      function validatePhoneNumber(input) {
+        const phone = input.value;
+        if (phone.length > 10) {
+          alert("Phone number cannot exceed 10 digits");
+          input.value = phone.slice(0, 10); // Limit input to 10 characters
+        } else if (!/^\d*$/.test(phone)) {
+          alert("Phone number should contain only digits");
+          input.value = phone.replace(/\D/g, ""); // Remove non-digit characters
+        }
+      }
+
+      function validateEmail(input) {
+        const email = input.value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          alert("Please enter a valid email address containing '@' and '.'");
+        }
+      }
+
+      function validatePassword(input) {
+        const password = input.value;
+        const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/;
+        if (!passwordPattern.test(password)) {
+          alert(
+            "Password must contain at least 8 characters, including one uppercase letter, one special character, and one number."
+          );
+        }
+      }
+
+      document.querySelector("form.sign-up-form").addEventListener("submit", function (e) {
+        const phoneInput = document.getElementById("phone").value;
+        const emailInput = document.getElementById("register-email").value;
+        const passwordInput = document.getElementById("register-password").value;
+
+        if (phoneInput.length !== 10) {
+          alert("Enter a valid 10-digit phone number");
+          e.preventDefault(); // Prevent form submission
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailInput)) {
+          alert("Enter a valid email address containing '@' and '.'");
+          e.preventDefault(); // Prevent form submission
+        }
+
+        const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/;
+        if (!passwordPattern.test(passwordInput)) {
+          alert(
+            "Password must contain at least 8 characters, including one uppercase letter, one special character, and one number."
+          );
+          e.preventDefault(); // Prevent form submission
+        }
+      });
+
+      document.querySelector("form.sign-in-form").addEventListener("submit", function (e) {
+        const emailInput = document.getElementById("login-email").value;
+        const passwordInput = document.getElementById("login-password").value;
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailInput)) {
+          alert("Enter a valid email address containing '@' and '.'");
+          e.preventDefault(); // Prevent form submission
+        }
+
+        const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/;
+        if (!passwordPattern.test(passwordInput)) {
+          alert(
+            "Password must contain at least 8 characters, including one uppercase letter, one special character, and one number."
+          );
+          e.preventDefault(); // Prevent form submission
+        }
+      });
+    </script>
+  </body>
+</html>

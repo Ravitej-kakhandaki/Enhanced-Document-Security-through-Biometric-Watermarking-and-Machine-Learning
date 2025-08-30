@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--========== CSS ==========-->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/styles.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/loader.css') }}">
+        <style>
+            input{
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                margin: 10px 0;
+            }
+        </style>
+        <title>watermarking</title>
+    </head>
+    <body>
+
+        <!-- Loader -->
+        <div id="loader" class="loader" style="display: none;"></div>
+
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="#" class="nav__logo"><h1>Biometric Watermarking</h1></a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="/page3" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="/audioencryption" class="nav__link active-link">Encryption</a></li>
+                        <li class="nav__item"><a href="/audiodecryption" class="nav__link">Decryption</a></li>
+                        <li class="nav__item"><a href="/" class="nav__link">Logout</a></li>
+                        <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+        <!--========== HEADER ENDS ==========-->
+
+        <main class="l-main">
+
+            <!--========== SERVICES ==========-->
+            <section class="services section bd-container" id="services">
+                {% if msg %}
+                <center><p>{{msg}}</p></center>
+            {% endif %}
+                <div class="services__container  bd-grid">
+                    <div class="services__content">
+                        <h3 class="section-subtitle" >Audio Encryption</h3>
+                        <hr>
+                        <form method = "POST" style="text-align: left;" id="myForm"  enctype="multipart/form-data" action="/audioencryption" class="sign-in-form">
+                            <label for="">Original audio file</label><br>
+                            <input type="file" name="audio" required /><br>
+                            <label for="">Input text</label><br>
+                            <input type="text" name="Text" placeholder="Enter text to be encrypt" required /><br>
+                            <input type="text" placeholder="Enter OTP" required name="otp" style="width: 70%;"> &nbsp;  &nbsp;<a onclick="GetOTP();" style="color: orangered;cursor: pointer;">Get OTP</a>
+                            <p id="res"></p>
+                            <center><input type="submit" onclick="StartLoader()"  value="Encrypt" style="width: 50%;" class="button" /></center>
+                          </form>
+                    </div>
+
+                    <div class="services__content">
+                        <h3 class="section-subtitle" >Input</h3>
+                        <hr>
+                        {% if string %}
+                            <p>Input Text: {{string}}</p>
+                        {% endif %}
+                        <br>
+                        {% if input %}
+                            <audio controls>
+                                <source src="{{input}}">
+                            </audio>
+                        {% endif %}
+                    </div>
+
+                    <div class="services__content">
+                        <h3 class="section-subtitle" >Output</h3>
+                        <hr>
+                        {% if output %}
+                        <p>Output file</p><br>
+                        <audio controls>
+                            <source src="{{output}}">
+                        </audio>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            <!--========== SERVICES ENDS ==========-->
+            
+        </main>
+
+        <!--========== FOOTER ==========-->
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="static/styles/js/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            function GetOTP(){
+                $.ajax({
+                    method:"get",
+                    url:"/getotp",
+                    success:function(res){
+                        document.getElementById('res').innerHTML = res;
+                    }
+                });
+            }
+
+            if('{{msg}}'){
+                alert('{{msg}}');
+            }
+
+            function StartLoader(){
+                const inputs = document.querySelectorAll('#myForm input, #myForm textarea, #myForm select');
+                let isFormValid = true;
+                let errorMessage = "";
+                inputs.forEach(function(input) {
+                    if (input.value.trim() === "") {
+                        isFormValid = false;
+                        errorMessage += `${input.name} is required.\n`;
+                    }
+                });
+                if (isFormValid) {
+                document.getElementById('loader').style.display = 'flex';
+                }
+            }
+
+        </script>
+    </body>
+</html>
